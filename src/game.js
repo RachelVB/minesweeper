@@ -22,11 +22,11 @@ class Game {
     if(this._board.playerBoard[rowIndex][columnIndex] === 'B') {
       console.log('Game Over!')
       this._board.print();
-    } else if (this._board.hasSafeTiles()) {
+    } else if (!this._board.hasSafeTiles()) {
       console.log('Congratulations! You have Won!')
     } else {
       console.log('Current Board:')
-      return printBoard;
+      this._board.print();
     }
   }
-};
+}

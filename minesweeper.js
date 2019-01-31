@@ -1,4 +1,64 @@
-export class Board {
+// const blankLine = (' | | ');
+// // The verticle line is known as a pipe, and the blankLine variable represents one row with 3 columns.
+
+// console.log(`This is what an empty board would look like:`);
+// // This is how we print vertically.
+// console.log(blankLine);
+// console.log(blankLine);
+// console.log(blankLine);
+
+// const guessLine = '1| | ';
+
+// const bombLine = ' |B| ';
+
+// console.log('This is what a board with a guess and a bomb on it would look like:');
+// console.log(guessLine);
+// console.log(bombLine);
+// console.log(blankLine);
+
+/* const printBoard = board => {
+  console.log('Current Board: ')
+  console.log(board[0].join(' | '))
+  console.log(board[1].join(' | '))
+  console.log(board[2].join(' | '))
+}
+
+let board = [
+  [' ',' ',' '],
+  [' ',' ',' '],
+  [' ',' ',' ']
+];
+
+printBoard(board);
+
+// Make sure you put your select your array in its seperate bracket.
+board[0][1] = '1';
+board[2][2] = 'B';
+
+printBoard(board);
+*/
+
+class Game {
+  constructor(numberOfRows,numberOfColumns,numberOfBombs) {
+    this._board = new Board(numberOfRows,numberOfColumns,numberOfBombs);
+  }
+  playMove(rowIndex,columnIndex) {
+    this._board.flipTile(rowIndex,columnIndex);
+    if(this._board.playerBoard[rowIndex][columnIndex] === 'B') {
+      console.log('Game Over!')
+      this._board.print();
+    } else if (!this._board.hasSafeTiles()) {
+      console.log('Congratulations! You have Won!')
+    } else {
+      console.log('Current Board:')
+      this._board.print();
+    }
+  }
+}
+
+
+
+class Board {
   constructor(numberOfRows,numberOfColumns,numberOfBombs) {
     this._numberOfBombs = numberOfBombs;
 
@@ -87,3 +147,24 @@ export class Board {
         return board;
       }
 }
+
+// const printBoard = board => {
+//   // I used a bracket after my 'row=>' and my table did not print. 
+//   console.log(board.map(row => row.join(' | ')).join('\n'));
+// };
+
+// const playerBoard = Board.generatePlayerBoard(3,4);
+// const bombBoard = Board.generateBombBoard(3,4,5);
+
+// console.log('Player Board: ');
+// printBoard(playerBoard);
+// console.log('Bomb Board: ');
+// printBoard(bombBoard);
+
+// flipTile(playerBoard,bombBoard, 0,1);
+// console.log('Updated Player Board: ');
+// printBoard(playerBoard);
+
+const g = new Game(3, 3, 3);
+g.playMove(0, 0);
+g.playMove(1,0);
